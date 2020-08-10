@@ -1,0 +1,25 @@
+p {
+    /* color of the border */
+    border: 1px darkgreen solid;
+    /* center the text and select the font*/
+    text-align: center;
+    /*use the font declared in index.html*/
+    font-family: 'Barlow Condensed', sans-serif;
+    /*adds margin from the borders*/    
+    margin: 10px;
+    /*adds space between borders of the area and the text*/
+    padding: 10px;
+    /*make the corners of the border rounded*/
+    border-radius: 5px;
+
+}
+
+p.message_warning {
+    background-color: #ffe0db;
+    /*change color and font size of the text*/
+    color: red;
+    font-size: large;
+
+    /*change cursor to the pointer* when over the box*/
+    cursor: pointer;
+}

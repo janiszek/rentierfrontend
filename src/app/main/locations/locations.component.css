@@ -1,0 +1,79 @@
+div.products-section {
+    max-width: 1000px;  
+    /*text-align: center;*/
+    padding: 10px;
+    background-color: gray;
+  }
+  
+  .products-section table {
+      text-align: center;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+      width: 100%;
+    }
+    
+    .products-section table thead {
+      background-color: #036b80;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 400;
+    }
+    
+    .products-section table thead th {
+      padding: 10px 0;
+    }
+    
+    .products-section table tbody {
+      color: #00a6b6;
+      background-color: #fff;
+    }
+    
+    .products-section table tbody td {
+      padding: 5px 0;
+    }
+    
+    .products-section table tbody td img{
+        height: 100px;
+    }
+    
+    .products-section table tbody tr:nth-child(even) {
+      background-color: #e1e1e1;
+    }
+    
+    .products-section table tbody tr:hover {
+      background-color: #ccc;
+    }
+    
+    .products-section table tbody td a {
+      cursor: pointer;
+      color: #e8503e;
+    }
+    
+    .products-section table tbody td a:hover {
+      color: #d53725;
+    }
+    
+    .products-section table tbody td.inactive {
+      color: #2e1b46;
+    }
+    
+    .products-section table .hover-link {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .products-section table .hover-link:hover .hover-img {
+      display: initial;
+    }
+    
+    .products-section table .hover-img {
+      display: none;
+      position: absolute;
+      top: 30px;
+      left: 20px;
+      z-index: 2;
+      width: 80px;
+      height: auto;
+      border: 1px solid #414141;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+    

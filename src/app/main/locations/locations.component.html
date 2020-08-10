@@ -1,0 +1,26 @@
+<div class="gray-section products-section">
+    <H1>ADMIN - List of locations</H1>
+
+    <div *ngIf="!locationList || locationList.length === 0">No rent location found!</div>
+
+    <table *ngIf="locationList!=null && locationList.length > 0">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Photo</th>
+                <!--<th></th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let location of locationList">
+                <td>{{location.id}}</td>
+                <td>{{location.shortName}}</td>
+                <td>{{location.address}}</td>
+                <td><img alt="photo" src="assets/images/{{location.photoRef}}"/></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

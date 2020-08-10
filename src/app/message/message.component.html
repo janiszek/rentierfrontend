@@ -1,0 +1,7 @@
+<div *ngIf="messages.length>0" class="gray-section">
+    <p *ngFor="let message of messages" class="{{message.severity}}">
+        {{message.text}}
+    </p>
+
+    <div class="button" (click)="onClear()">Wyczysc</div>
+</div>

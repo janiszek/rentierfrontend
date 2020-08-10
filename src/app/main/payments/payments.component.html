@@ -1,0 +1,40 @@
+<div class="gray-section products-section">
+
+    <H1>Select location for payment listing</H1>
+
+    <div *ngIf="!locationList || locationList.length === 0">No rent location found!</div>
+    
+    <div *ngFor="let location of locationList" class="tile">
+        <div class="tile-header">{{location.shortName}}</div>
+        <div class=tile-img>
+            <img src="assets/images/{{location.photoRef}}" />
+        </div>
+
+        <table *ngIf="currentContractList[locationList.indexOf(location)] !== undefined" class="tile-description">
+            <tbody>
+                <tr>
+                    <td>Address:</td>
+                    <td>{{location.address}}</td>
+                </tr>
+                <tr>
+                    <td>Tenant:</td>
+                    <td *ngIf="currentContractList[locationList.indexOf(location)] !== null">{{currentContractList[locationList.indexOf(location)].tenant.shortName}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contract from: </td>
+                    <td *ngIf="currentContractList[locationList.indexOf(location)] !== null">{{currentContractList[locationList.indexOf(location)].dateFrom}}</td>
+                </tr>
+
+                <tr>
+                    <td>Contract till:</td>
+                    <td *ngIf="currentContractList[locationList.indexOf(location)] !== null">{{currentContractList[locationList.indexOf(location)].dateTo}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tile-action">
+            <a [routerLink]="[location.id,'show']">Show payments</a>
+        </div>
+    </div>
+</div>

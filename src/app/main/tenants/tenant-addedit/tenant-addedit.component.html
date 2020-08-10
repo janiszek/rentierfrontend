@@ -1,0 +1,148 @@
+<div class="gray-section addedit-section">
+    <H1 *ngIf="tenant.id==0">Add a new tenant</H1>
+    <H1 *ngIf="tenant.id>0">Edit existing tenant</H1>
+
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+        <table class="tile-description">
+            <tbody>
+                <tr>
+                    <td>
+                        <label>Short Name:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.shortName" name="shortName" #shortName="ngModel" type="text" placeholder="short name"
+                                [disabled]="tenant.id>0" required minlength="2" maxlength="30">
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="shortName.invalid && (shortName.dirty || shortName.touched)" class="alert alert-danger">
+                            <div *ngIf="shortName.errors.required">
+                                Name is a required field.
+                            </div>
+                            <div *ngIf="shortName.errors.minlength">
+                                Name must be at least 2 characters long.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>First Name:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.firstName" name="firstName" #firstName="ngModel" type="text"
+                                placeholder="first name" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                            <div *ngIf="firstName.errors.required">
+                                FirstName is a required field.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Last Name:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.lastName" name="lastName" #lastName="ngModel" type="text"
+                                placeholder="last name" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+                            <div *ngIf="lastName.errors.required">
+                                LastName is a required field.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Pesel:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.pesel" name="pesel" #pesel="ngModel" type="text"
+                                placeholder="pesel" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Document ID:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.documentId" name="documentId" #documentId="ngModel" type="text"
+                                placeholder="document id" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Address:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.address" name="address" #address="ngModel" type="text"
+                                placeholder="address" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Email:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.email" name="email" #email="ngModel" type="text"
+                                placeholder="email" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Phone:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.phone" name="phone" #phone="ngModel" type="text"
+                                placeholder="phone" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Description:</label>
+                    </td>
+                    <td>
+                        <div>
+                            <input [(ngModel)]="tenant.details.description" name="description" #description="ngModel" type="text"
+                                placeholder="description" required>
+                        </div>
+                    </td>
+                </tr>
+
+                <br>
+                <tr>
+                    <td>
+                        <button type="submit"
+                            [disabled]="!form.dirty || (form.invalid && (form.dirty || form.touched))">
+                            Save</button>
+                    </td>
+                    <td>
+                        <!--<button (click)="goBackToPrevious()">Cancel</button>-->
+                        <button (click)="onCancel($event)" type="cancel" >Cancel</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </form>
+</div>

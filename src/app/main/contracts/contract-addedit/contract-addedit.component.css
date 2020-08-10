@@ -1,0 +1,21 @@
+div.addedit-section {
+    text-align: left;
+    padding: 10px;
+    background-color: gray;
+  }
+
+.tile-description {
+    background-color: #036b80;
+    padding: 10px 30px;
+    /*margin: auto;*/    
+}
+
+.tile-description td{
+    opacity: 0.7;
+    text-align: left;
+}
+
+.tile-description td:nth-of-type(2) {
+    opacity: 0.9;
+    text-align: right;
+}

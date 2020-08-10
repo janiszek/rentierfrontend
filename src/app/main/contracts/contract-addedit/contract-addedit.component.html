@@ -1,0 +1,82 @@
+<div class="gray-section addedit-section">
+
+    <H1 *ngIf="contractId==0">Add a new contract</H1>
+    <H1 *ngIf="contractId>0">Edit existing contract</H1>
+
+    <form [formGroup]="contractEditForm" (ngSubmit)="onSubmit()">
+        <table class="tile-description">
+            <tbody>
+                <tr>
+                    <td>
+                        <label>Date:</label>
+                    </td>
+                    <td>
+                        <input type="date" formControlName="dateContract">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Valid from:</label>
+                    </td>
+                    <td>
+                        <input type="date" formControlName="dateFrom">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Valid to:</label>
+                    </td>
+                    <td>
+                        <input type="date" formControlName="dateTo">
+                    </td>                
+                </tr>
+
+                <!--<div *ngIf="locationList!=null && locationList.length > 0">
+                    <label for="location">Location: </label>
+                    <select formControlName="locationID">
+                        <option *ngFor="let location of locationList" value="{{locationList.indexOf(location)}}">
+                            {{location}}</option>
+                    </select>
+                </div>-->
+
+                <tr *ngIf="locationList!=null && locationList.length > 0">
+                    <td>
+                        <label for="location">Location: </label>
+                    </td>
+                    <td>
+                        <select formControlName="locationID">
+                        <option *ngFor="let location of locationList" value="{{locationList.indexOf(location)}}">
+                            {{location}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr *ngIf="tenantList!=null && tenantList.length > 0">
+                    <td>
+                        <label for="tenantID">Tenant: </label>
+                    </td>
+                    <td>
+                        <select formControlName="tenantID">
+                        <option *ngFor="let tenant of tenantList" value="{{tenantList.indexOf(tenant)}}">
+                            {{tenant}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <button [disabled]="!contractEditForm.touched || !contractEditForm.valid" type="submit">
+                            Save</button>
+                    </td>
+                    <td>
+                        <!--<button (click)="goBackToPrevious()">Cancel</button>-->
+                        <button (click)="onCancel($event)" type="cancel" >Cancel</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div *ngIf="errorMessage.length>0">ERROR! {{errorMessage}}</div>
+    </form>
+</div>

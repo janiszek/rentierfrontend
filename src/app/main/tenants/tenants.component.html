@@ -1,0 +1,45 @@
+<div class="gray-section products-section">
+    <H1>ADMIN - List of tenants</H1>
+
+
+    <div *ngIf="!tenantList || tenantList.length === 0">No tenant found!</div>
+
+    <table *ngIf="tenantList!=null && tenantList.length > 0">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Short name</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Pesel</th>
+        <th>Document Id</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+    </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tenant of tenantList">
+        <td>{{tenant.id}}</td>
+        <td>{{tenant.shortName}}</td>
+        <td>{{tenant.details.firstName}}</td>
+        <td>{{tenant.details.lastName}}</td>
+        <td>{{tenant.details.pesel}}</td>
+        <td>{{tenant.details.documentId}}</td>
+        <td>{{tenant.details.address}}</td>
+        <td>{{tenant.details.email}}</td>
+        <td>{{tenant.details.phone}}</td>
+        <td>{{tenant.details.description}}</td>
+        <td><button [routerLink]="[tenant.id,'edit']">Edit</button>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <button routerLink="/tenants/addnew">Add new</button>
+</div>
+
+

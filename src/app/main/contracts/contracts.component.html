@@ -1,0 +1,59 @@
+<div class="gray-section products-section">
+
+    <H1>ADMIN - List of contracts</H1>
+
+    <!-- load filter data -->
+    <div class="column" *ngIf="locationList!=null && locationList.length > 0">
+        <label for="location">Location: </label>
+        <select class="slt-item" id="location" name="location" (change)="onChangeLocation($event)">
+            <option *ngFor="let location of locationList">
+                {{location}}</option>
+        </select>
+    </div>
+    <br>
+    <div class="column" *ngIf="tenantList!=null && tenantList.length > 0">
+        <label for="tenant">Tenant: </label>
+        <select class="slt-item" id="tenant" name="tenant" (change)="onChangeTenant($event)">
+            <option *ngFor="let tenant of tenantList">
+                {{tenant}}</option>
+        </select>
+    </div>
+    <br>
+
+    <!-- load table with contracts -->
+    <div *ngIf="!contractList || contractList.length === 0">No contract found!</div>
+
+    <table *ngIf="contractList!=null && contractList.length > 0">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Valid from</th>
+                <th>Valid to</th>
+                <th>Location</th>
+                <th>Tenant</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let contract of contractList">
+                <!--<td>{{contract.dateContract.getFullYear() + '-' + (contract.dateContract.getMonth()+1) + '-' + contract.dateContract.getDate()}}</td>
+                    <td>{{contract.dateFrom.getFullYear() + '-' + (contract.dateFrom.getMonth()+1) + '-' + contract.dateFrom.getDate()}}</td>
+                    <td>{{contract.dateTo.getFullYear() + '-' + (contract.dateTo.getMonth()+1) + '-' + contract.dateTo.getDate()}}</td>-->
+                <td>{{contract.dateContract}}</td>
+                <td>{{contract.dateFrom}}</td>
+                <td>{{contract.dateTo}}</td>
+                <td>{{locationList[contract.location.id]}}</td>
+                <td>{{tenantList[contract.tenant.id]}}</td>
+
+                <td><a [routerLink]="[contract.id,'edit']">Details</a></td>
+                <!--<td><a [routerLink]="[contract.id,'delete']">Delete?</a></td>-->
+                <td><button (click)="deleteContractClick(contract.id)">Delete?</button>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <button routerLink="/contracts/addnew">Add new</button>
+</div>
