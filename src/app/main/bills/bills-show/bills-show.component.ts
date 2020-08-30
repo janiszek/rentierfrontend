@@ -51,8 +51,8 @@ export class BillsShowComponent implements OnInit {
           if (contract !== null) {
             this.contractSelected = contract;
           }
-          this.billService.findAllByLocationIdOrderByDateAscBillGroupAsc(this.locationSelected.id).subscribe(bills => {
-            this.billList = bills;
+          this.billService.findAllByLocationIdOrderByDateAscBillGroupAsc(this.locationSelected.id).subscribe(billPage => {
+            this.billList = billPage.content;
 
             this.dataSource = new MatTableDataSource<Bill>(this.billList);
             this.billTotals = this.billList.slice();

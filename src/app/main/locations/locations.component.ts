@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationsService } from 'src/app/Services/Locations/locations.service';
-import { RentLocation } from 'src/app/Model/locations';
+import { RentLocation, RentLocationPage } from 'src/app/Model/locations';
 
 @Component({
   selector: 'app-locations',
@@ -9,13 +9,15 @@ import { RentLocation } from 'src/app/Model/locations';
 })
 export class LocationsComponent implements OnInit {
 
-  locationList: RentLocation[];
+  /*locationList: RentLocation[];*/
+  locationPage: RentLocationPage;
 
   constructor(private locationService: LocationsService) { }
 
   ngOnInit(): void {
-    this.locationService.getLocations().subscribe(locations => {
-      this.locationList = locations;
+    // use the pagination by default
+    this.locationService.getLocations().subscribe(locationPage => {
+      this.locationPage = locationPage;
     });
   }
 

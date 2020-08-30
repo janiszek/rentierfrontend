@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContractsService } from 'src/app/Services/Contracts/contracts.service';
-import { Contract } from 'src/app/Model/contracts';
+import { Contract, ContractPage } from 'src/app/Model/contracts';
 
 @Component({
   selector: 'app-contracts',
@@ -9,7 +9,9 @@ import { Contract } from 'src/app/Model/contracts';
 })
 export class ContractsComponent implements OnInit {
 
-  contractList: Contract[];
+  /*contractList: Contract[];*/
+  contractPage: ContractPage;
+
   locationList: string[];
   tenantList: string[];
   locationSelected = 0;
@@ -29,13 +31,18 @@ export class ContractsComponent implements OnInit {
 
     if (this.locationSelected !== 0 || this.tenantSelected !== 0) {
       this.contractService.getContractsFiltered(this.locationSelected, this.tenantSelected)
-        .subscribe(contracts => {
-          this.contractList = contracts;
+        .subscribe(contractPage => {
+          this.contractPage = contractPage;
         });
     }
     else {
-      this.contractService.getContracts().subscribe(contracts => {
+      /*this.contractService.getContracts().subscribe(contracts => {
         this.contractList = contracts;
+      });*/
+
+      // use the pagination by default
+      this.contractService.getContracts().subscribe(contractPage => {
+        this.contractPage = contractPage;
       });
     }
   }

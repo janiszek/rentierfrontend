@@ -2,9 +2,9 @@
     <H1>ADMIN - List of tenants</H1>
 
 
-    <div *ngIf="!tenantList || tenantList.length === 0">No tenant found!</div>
+    <div *ngIf="!tenantPage || tenantPage.content.length === 0">No tenant found!</div>
 
-    <table *ngIf="tenantList!=null && tenantList.length > 0">
+    <table *ngIf="tenantPage!=null && tenantPage.content.length > 0">
       <thead>
       <tr>
         <th>Id</th>
@@ -22,7 +22,7 @@
     </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let tenant of tenantList">
+      <tr *ngFor="let tenant of tenantPage.content">
         <td>{{tenant.id}}</td>
         <td>{{tenant.shortName}}</td>
         <td>{{tenant.details.firstName}}</td>

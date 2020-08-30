@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { Payment, paymentType } from 'src/app/Model/payments';
+import { Payment, paymentType, PaymentPage } from 'src/app/Model/payments';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MessagesService } from '../Messages/messages.service';
 import { Message } from 'src/app/Model/message';
@@ -29,8 +29,8 @@ export class PaymentsService {
     }
   }
 
-  findAllByLocationIdAndTenantIdOrderByDateAsc(locationID: number, tenantID: number): Observable<Payment[]> {
-    return this.httpClient.get<Payment[]>(this.pathPayments + `/filter/${locationID}/${tenantID}`)
+  findAllByLocationIdAndTenantIdOrderByDateAsc(locationID: number, tenantID: number): Observable<PaymentPage> {
+    return this.httpClient.get<PaymentPage>(this.pathPayments + `/filter/${locationID}/${tenantID}`)
       .pipe(
         catchError(err => {
           this.addErrorMessage(err);
@@ -71,7 +71,8 @@ export class PaymentsService {
   }
 
   addErrorMessage(err: HttpErrorResponse) {
-    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message));
+    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message + '. ' +
+      err.error.error + '. ' + err.error.message));
   }
 }
 

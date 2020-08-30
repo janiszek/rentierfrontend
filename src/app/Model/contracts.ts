@@ -1,6 +1,11 @@
 import { RentLocation } from './locations';
 import { Tenant } from './tenants';
 
+// used for pagination
+export class ContractPage {
+    content: Contract[];
+}
+
 export class Contract {
     public id: number;
     public dateContract: string;

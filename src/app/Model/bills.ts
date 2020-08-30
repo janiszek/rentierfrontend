@@ -1,6 +1,7 @@
 import { NumberValueAccessor } from '@angular/forms';
 import { RentLocation } from './locations';
 
+
 class BillGroup{
     public id: number;
     public description: string;
@@ -12,6 +13,12 @@ export enum billType {
     REAL,
     PAID
   }
+
+
+// used for pagination
+export class BillPage {
+    content: Bill[];
+}
 
 export class Bill {
     public id: number;

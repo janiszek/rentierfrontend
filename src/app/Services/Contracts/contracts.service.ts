@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Contract } from '../../Model/contracts';
+import { Injectable, SystemJsNgModuleLoader } from '@angular/core';
+import { Contract, ContractPage } from '../../Model/contracts';
 import { Observable, of, throwError } from 'rxjs';
 import { LocationsService } from '../Locations/locations.service';
 import { TenantsService } from '../Tenants/tenants.service';
@@ -41,8 +41,17 @@ export class ContractsService {
 
   }
 
-  getContracts(): Observable<Contract[]> {
+  /*getContracts(): Observable<Contract[]> {
     return this.httpClient.get<Contract[]>(this.pathContracts)
+      .pipe(
+        catchError(err => {
+          this.addErrorMessage(err);
+          return throwError(err);
+        })
+      );
+  }*/
+  getContracts(): Observable<ContractPage> {
+    return this.httpClient.get<ContractPage>(this.pathContracts)
       .pipe(
         catchError(err => {
           this.addErrorMessage(err);
@@ -52,9 +61,13 @@ export class ContractsService {
   }
 
   // find filtered contract http://localhost:8080/contracts/filter/{locationId}/{tenantId}
-  getContractsFiltered(locationID: number, tenantID: number): Observable<Contract[]> {
+  /*getContractsFiltered(locationID: number, tenantID: number): Observable<Contract[]> {
     const contractFiltered: Contract[] = [];
     return this.httpClient.get<Contract[]>(this.pathContracts + `/filter/${locationID}/${tenantID}`);
+  }*/
+
+  getContractsFiltered(locationID: number, tenantID: number): Observable<ContractPage> {
+    return this.httpClient.get<ContractPage>(this.pathContracts + `/filter/${locationID}/${tenantID}`);
   }
 
   // find given contract http://localhost:8080/contracts/{contractId}
@@ -113,7 +126,8 @@ export class ContractsService {
 
 
   addErrorMessage(err: HttpErrorResponse) {
-    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message));
+    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message + '. ' +
+      err.error.error + '. ' + err.error.message));
   }
 
 }

@@ -96,8 +96,8 @@ export class PaymentsShowComponent implements OnInit {
             this.contractSelected = contract;
           }
           this.paymentService.findAllByLocationIdAndTenantIdOrderByDateAsc(this.locationSelected.id,
-            this.contractSelected !== null ? this.contractSelected.tenant.id : 0).subscribe(payments => {
-            this.paymentList = payments;
+            this.contractSelected !== null ? this.contractSelected.tenant.id : 0).subscribe(paymentPage => {
+            this.paymentList = paymentPage.content;
 
             this.dataSource = new MatTableDataSource<Payment>(this.paymentList);
             this.paymentTotals = this.paymentList.slice();

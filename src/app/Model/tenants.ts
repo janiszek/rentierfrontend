@@ -1,3 +1,8 @@
+// used for pagination
+export class TenantPage {
+    content: Tenant[];
+}
+
 class TenantDetails{
     public id: number;
     public firstName: string;

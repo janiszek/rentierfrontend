@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Tenant } from '../../Model/tenants';
+import { Tenant, TenantPage } from '../../Model/tenants';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
@@ -19,8 +19,8 @@ export class TenantsService {
   constructor(private httpClient: HttpClient, private messageService: MessagesService) {
   }
 
-  public getTenants(): Observable<Tenant[]> {
-    return this.httpClient.get<Tenant[]>(this.pathTenants)
+  public getTenants(): Observable<TenantPage> {
+    return this.httpClient.get<TenantPage>(this.pathTenants)
       .pipe(
         catchError(err => {
           this.addErrorMessage(err);
@@ -50,7 +50,7 @@ export class TenantsService {
   public getTenantShortNames(): Observable<string[]> {
     return this.getTenants()
     .pipe(
-      map(tenants => this.ExtractShortNames(tenants))
+      map(tenantPage => this.ExtractShortNames(tenantPage.content))
     );
   }
 
@@ -76,7 +76,8 @@ export class TenantsService {
   }
 
 private addErrorMessage(err: HttpErrorResponse){
-    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message));
-  }
+  this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message + '. ' +
+  err.error.error + '. ' + err.error.message));
+}
 
 }

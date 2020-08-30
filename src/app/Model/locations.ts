@@ -1,3 +1,8 @@
+// used for pagination
+export class RentLocationPage {
+    content: RentLocation[];
+}
+
 export class RentLocation {
     public id: number;
     public shortName: string;

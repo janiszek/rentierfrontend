@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RentLocation } from '../../Model/locations';
+import { RentLocation, RentLocationPage } from '../../Model/locations';
 import { Observable, of, throwError, from } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -18,8 +18,17 @@ export class LocationsService {
   constructor(private httpClient: HttpClient, private messageService: MessagesService) {
   }
 
-  getLocations(): Observable<RentLocation[]> {
+  /*getLocations(): Observable<RentLocation[]> {
     return this.httpClient.get<RentLocation[]>(this.pathLocations)
+      .pipe(
+        catchError(err => {
+          this.addErrorMessage(err);
+          return throwError(err);
+        })
+      );
+  }*/
+  getLocations(): Observable<RentLocationPage> {
+    return this.httpClient.get<RentLocationPage>(this.pathLocations)
       .pipe(
         catchError(err => {
           this.addErrorMessage(err);
@@ -44,12 +53,14 @@ export class LocationsService {
   public getLocationShortNames(): Observable<string[]> {
     return this.getLocations()
     .pipe(
-      map(locations => this.ExtractShortNames(locations))
+      map(locationPage => this.ExtractShortNames(locationPage.content))
     );
   }
 
   addErrorMessage(err: HttpErrorResponse){
-    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message));
+    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message + '. ' +
+    err.error.error + '. ' + err.error.message));
+
   }
 
 }

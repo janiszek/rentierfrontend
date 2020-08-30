@@ -6,6 +6,11 @@ export enum paymentType {
     CHARGED
   }
 
+// used for pagination
+export class PaymentPage {
+    content: Payment[];
+}
+
 export class Payment {
     public id: number;
     public date: string;

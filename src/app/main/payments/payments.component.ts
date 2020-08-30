@@ -22,8 +22,8 @@ export class PaymentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.locationService.getLocations().subscribe(locations => {
-      this.locationList = locations;
+    this.locationService.getLocations().subscribe(locationPage => {
+      this.locationList = locationPage.content;
       this.locationList.forEach(location => {
         this.contractService.findByLocationIdAndDateToAfterOrderByDateToDesc(location.id).subscribe(contract => {
           this.currentContractList.push(contract);

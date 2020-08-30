@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Bill, billType } from '../../Model/bills';
+import { Bill, billType, BillPage } from '../../Model/bills';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
@@ -21,8 +21,8 @@ export class BillsService {
   constructor(private httpClient: HttpClient, private messageService: MessagesService) {
   }
 
-  findAllByLocationIdOrderByDateAscBillGroupAsc(locationID: number): Observable<Bill[]> {
-    return this.httpClient.get<Bill[]>(this.pathBills + `/filter/${locationID}`)
+  findAllByLocationIdOrderByDateAscBillGroupAsc(locationID: number): Observable<BillPage> {
+    return this.httpClient.get<BillPage>(this.pathBills + `/filter/${locationID}`)
     .pipe(
       catchError(err => {
         this.addErrorMessage(err);
@@ -63,7 +63,8 @@ export class BillsService {
   }
 
   addErrorMessage(err: HttpErrorResponse){
-    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message));
+    this.messageService.add(new Message('message_warning', 'HTTP ERROR: ' + err.status + ' ' + err.message + '. ' +
+      err.error.error + '. ' + err.error.message));
   }
 
 }

@@ -21,9 +21,10 @@
     <br>
 
     <!-- load table with contracts -->
-    <div *ngIf="!contractList || contractList.length === 0">No contract found!</div>
+    <!-- for pageable version replace contractList with ContractPage-->
+    <div *ngIf="!contractPage || contractPage.content.length === 0">No contract found!</div>
 
-    <table *ngIf="contractList!=null && contractList.length > 0">
+    <table *ngIf="contractPage!=null && contractPage.content.length > 0">
         <thead>
             <tr>
                 <th>Date</th>
@@ -36,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let contract of contractList">
+            <tr *ngFor="let contract of contractPage.content">
                 <!--<td>{{contract.dateContract.getFullYear() + '-' + (contract.dateContract.getMonth()+1) + '-' + contract.dateContract.getDate()}}</td>
                     <td>{{contract.dateFrom.getFullYear() + '-' + (contract.dateFrom.getMonth()+1) + '-' + contract.dateFrom.getDate()}}</td>
                     <td>{{contract.dateTo.getFullYear() + '-' + (contract.dateTo.getMonth()+1) + '-' + contract.dateTo.getDate()}}</td>-->
