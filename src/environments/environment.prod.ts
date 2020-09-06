@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://localhost:8080/rentierbackend'
+  backendUrl: 'https://kj-rentier-backend.azurewebsites.net'
 };

@@ -15,18 +15,19 @@ export class PaymentsComponent implements OnInit {
 
   locationList: RentLocation[] = [];
   currentContractList: Contract[] = [];
-  /*currentTenantList: Tenant[] = [];*/
 
-  constructor(private locationService: LocationsService, private contractService: ContractsService,
-              /*private tenantService: TenantsService*/) {
+  constructor(private locationService: LocationsService, private contractService: ContractsService) {
   }
 
   ngOnInit(): void {
+    this.locationList = [];
+    this.currentContractList = [];
     this.locationService.getLocations().subscribe(locationPage => {
       this.locationList = locationPage.content;
       this.locationList.forEach(location => {
         this.contractService.findByLocationIdAndDateToAfterOrderByDateToDesc(location.id).subscribe(contract => {
-          this.currentContractList.push(contract);
+          /*this.currentContractList.push(contract);*/
+          this.currentContractList[this.locationList.indexOf(location)] = contract;
         });
       });
     });
