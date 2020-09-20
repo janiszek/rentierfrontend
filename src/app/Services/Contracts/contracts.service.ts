@@ -67,7 +67,14 @@ export class ContractsService {
   }*/
 
   getContractsFiltered(locationID: number, tenantID: number): Observable<ContractPage> {
-    return this.httpClient.get<ContractPage>(this.pathContracts + `/filter/${locationID}/${tenantID}`);
+    // return this.httpClient.get<ContractPage>(this.pathContracts + `/filter/${locationID}/${tenantID}`);
+    return this.httpClient.get<ContractPage>(this.pathContracts + `/filterParam?locationId=${locationID}&tenantId=${tenantID}`)
+    .pipe(
+      catchError(err => {
+        this.addErrorMessage(err);
+        return throwError(err);
+      })
+    );
   }
 
   // find given contract http://localhost:8080/contracts/{contractId}

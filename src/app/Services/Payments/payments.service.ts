@@ -30,7 +30,8 @@ export class PaymentsService {
   }
 
   findAllByLocationIdAndTenantIdOrderByDateAsc(locationID: number, tenantID: number): Observable<PaymentPage> {
-    return this.httpClient.get<PaymentPage>(this.pathPayments + `/filter/${locationID}/${tenantID}`)
+    // return this.httpClient.get<PaymentPage>(this.pathPayments + `/filter/${locationID}/${tenantID}`)
+    return this.httpClient.get<PaymentPage>(this.pathPayments + `/filterParam?locationId=${locationID}&tenantId=${tenantID}`)
       .pipe(
         catchError(err => {
           this.addErrorMessage(err);

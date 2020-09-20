@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'https://kj-rentier-backend.azurewebsites.net'
+  backendUrl: 'http://localhost:8080'
 };
 
 /*
